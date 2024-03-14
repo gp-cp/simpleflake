@@ -110,3 +110,15 @@ func (u *SimpleflakeId) UnmarshalJSON(bs []byte) error {
 	*u = SimpleflakeId(i)
 	return nil
 }
+
+func SimpleflakeIdToString(id SimpleflakeId) string {
+	return strconv.FormatUint(uint64(id), 10)
+}
+
+func SimpleflakeIdFromString(s string) (SimpleflakeId, error) {
+	i, err := strconv.ParseUint(s, 10, 64)
+	if err != nil {
+		return 0, err
+	}
+	return SimpleflakeId(i), nil
+}
